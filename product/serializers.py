@@ -10,4 +10,4 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Product
         # tell the serializer which data we wanna receive 🙂
-        fields = ['name','brand','price']
+        fields = '__all__'
