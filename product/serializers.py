@@ -3,10 +3,11 @@ from .models import Product
 
 
 
-## start the srealizing 
+# start the srealizing 
 
 class ProductSerializer(serializers.ModelSerializer):
     
     class Meta: 
         model = Product
-        fields = "__all__"
+        # tell the serializer which data we wanna receive 🙂
+        fields = ['name','brand','price']
