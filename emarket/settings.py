@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=35a=2tb-l!kstwdj2p$rxe$tfpc#3_db9hei=+g^t(dc8qpz!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -38,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'product',
-    'django_filters'
+    'django_filters',
+    'rest_framework_simplejwt',
+    'account',
     
 ]
 
@@ -80,6 +83,19 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME' : timedelta(days=15),
+    'REFRESH_TOKEN_LIFETIME' : timedelta(days=1),
+    'BLACKLIST_AFTER_ROTATION' : True,
+    'AUTH_HEADER_TYPES' : ('Bearer',),
+    'AUTH_TOKEN_CLASSES' : ('rest_framework_simplejwt.tokens.accessToken',),
 }
 
 
